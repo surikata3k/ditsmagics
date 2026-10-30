@@ -121,17 +121,32 @@ const desbloquejat = (i) => i === 0 || dades.opcions.desbloquejar || estrellesDe
 function pintaNivells() {
   const g = $('graellaNivells');
   g.innerHTML = '';
+  let seccioActual = null;
   NIVELLS.forEach((n, i) => {
+    if (n.seccio !== seccioActual) {
+      seccioActual = n.seccio;
+      const sec = SECCIONS[n.seccio];
+      const fets = NIVELLS.filter((m, j) => m.seccio === n.seccio && estrellesDe(j) > 0).length;
+      const total = NIVELLS.filter((m) => m.seccio === n.seccio).length;
+      const h = document.createElement('div');
+      h.className = `seccio seccio-${n.seccio}`;
+      h.innerHTML = `<h3>${sec.titol} <span class="comptador">${fets}/${total}</span></h3><p>${sec.desc}</p>`;
+      g.appendChild(h);
+    }
     const obert = desbloquejat(i);
     const est = estrellesDe(i);
+    const ppm = perfil()?.millorPPM[i];
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'nivell' + (obert ? '' : ' tancat') + (est ? ' fet' : '');
+    b.className = `nivell nivell-${n.seccio}` + (obert ? '' : ' tancat') + (est ? ' fet' : '');
     b.disabled = !obert;
     b.innerHTML = `
       <span class="num">${obert ? i + 1 : '🔒'}</span>
       <span class="nom">${n.titol}</span>
-      <span class="estrelles">${'★'.repeat(est)}<span class="buides">${'★'.repeat(3 - est)}</span></span>`;
+      <span class="peu-nivell">
+        <span class="estrelles">${'★'.repeat(est)}<span class="buides">${'★'.repeat(3 - est)}</span></span>
+        ${est && ppm ? `<span class="record" title="Millor velocitat">${ppm} ppm</span>` : ''}
+      </span>`;
     b.addEventListener('click', () => comencaNivell(i));
     g.appendChild(b);
   });
@@ -161,7 +176,7 @@ const estat = {
 function comencaNivell(i) {
   const n = NIVELLS[i];
   Object.assign(estat, {
-    nivell: i, text: generaText(i), pos: 0, fase: 0, correctes: 0, errors: 0, inici: null, errorsPos: new Set(),
+    nivell: i, text: generaText(i), spans: [], pos: 0, fase: 0, correctes: 0, errors: 0, inici: null, errorsPos: new Set(),
   });
   $('titolNivell').textContent = `Nivell ${i + 1}: ${n.titol}`;
   $('descNivell').textContent = n.desc;
@@ -172,18 +187,45 @@ function comencaNivell(i) {
   document.activeElement?.blur();
 }
 
+// Cada paraula (amb l'espai que la segueix) va dins d'un bloc que no es parteix.
 function pintaText() {
-  const cont = $('text');
-  cont.innerHTML = '';
+  const caixa = $('text');
+  caixa.innerHTML = '<div class="text-interior"></div>';
+  caixa.classList.toggle('llarg', estat.text.length > 120);
+  const cont = caixa.firstChild;
+  estat.spans = [];
+  let paraula = null;
   [...estat.text].forEach((c, i) => {
+    if (!paraula) {
+      paraula = document.createElement('span');
+      paraula.className = 'paraula';
+      cont.appendChild(paraula);
+    }
     const s = document.createElement('span');
     s.className = 'c';
     if (c === ' ') s.classList.add('espai');
     s.textContent = c === ' ' ? '·' : c;
-    if (i < estat.pos) s.classList.add(estat.errorsPos.has(i) ? 'fet-error' : 'fet');
-    if (i === estat.pos) s.classList.add('actual');
-    cont.appendChild(s);
+    paraula.appendChild(s);
+    estat.spans.push(s);
+    if (c === ' ') paraula = null;
   });
+  actualitzaCursor();
+}
+
+/** Marca la lletra anterior com a feta i la nova com a actual; desplaça el text si cal. */
+function actualitzaCursor() {
+  const anterior = estat.spans[estat.pos - 1];
+  if (anterior) {
+    anterior.classList.remove('actual', 'sacseja');
+    anterior.classList.add(estat.errorsPos.has(estat.pos - 1) ? 'fet-error' : 'fet');
+  }
+  const actual = estat.spans[estat.pos];
+  if (!actual) return;
+  actual.classList.add('actual');
+  const cont = $('text').firstChild;
+  const linia = parseFloat(getComputedStyle(cont).lineHeight) || 40;
+  const objectiu = Math.max(0, actual.offsetTop - linia * 0.9);
+  if (Math.abs(cont.scrollTop - objectiu) > linia / 2) cont.scrollTo({ top: objectiu, behavior: 'smooth' });
 }
 
 function marcaObjectiu() {
@@ -231,7 +273,7 @@ function encert(codi) {
   flaix(codi, 'premuda');
   so('ok');
   if (estat.pos >= estat.text.length) return acaba();
-  pintaText();
+  actualitzaCursor();
   actualitzaStats();
   marcaObjectiu();
 }
@@ -242,7 +284,7 @@ function error(codi) {
   estat.fase = 0;
   flaix(codi, 'erronia');
   so('error');
-  const actual = $('text').children[estat.pos];
+  const actual = estat.spans[estat.pos];
   if (actual) {
     actual.classList.remove('sacseja');
     void actual.offsetWidth;
@@ -313,7 +355,7 @@ function acaba() {
     p.millorPPM[estat.nivell] = Math.max(p.millorPPM[estat.nivell] || 0, Math.round(ppm));
     desa();
   }
-  pintaText();
+  actualitzaCursor();
   actualitzaStats();
   document.querySelectorAll('.tecla.objectiu').forEach((t) => t.classList.remove('objectiu'));
   so('fi');

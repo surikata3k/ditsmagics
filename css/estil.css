@@ -73,7 +73,19 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 }
 .nivell.fet .num { background: var(--verd); }
 .nivell .nom { font-weight: 800; font-size: 1.05rem; line-height: 1.2; }
+.nivell .peu-nivell { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; }
 .nivell .estrelles { color: var(--groc); font-size: 1.2rem; letter-spacing: 2px; }
+.nivell .record { font-size: .8rem; font-weight: 700; color: var(--tinta-suau); background: var(--fons); border-radius: 99px; padding: 2px 8px; }
+.seccio { grid-column: 1 / -1; margin-top: 18px; }
+.seccio:first-child { margin-top: 0; }
+.seccio h3 { margin: 0; font-size: 1.35rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+.seccio h3::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.seccio-mitja h3::before { background: #f08a24; }
+.seccio-avancat h3::before { background: #8d5bd6; }
+.seccio p { margin: 2px 0 0; color: var(--tinta-suau); }
+.comptador { font-size: .85rem; font-weight: 800; color: var(--tinta-suau); background: var(--paper); border: 1px solid var(--linia); border-radius: 99px; padding: 1px 10px; }
+.nivell-mitja .num { background: #f08a24; }
+.nivell-avancat .num { background: #8d5bd6; }
 .buides { color: #ddd6c6; }
 .nivell.tancat { opacity: .55; cursor: not-allowed; box-shadow: none; }
 .nivell.tancat .num { background: #ddd6c6; }
@@ -101,8 +113,11 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 .text {
   margin: 16px 0 8px; padding: 22px 26px; background: var(--paper); border-radius: var(--radi);
   box-shadow: var(--ombra); font-size: 2.1rem; line-height: 1.7; letter-spacing: .04em;
-  font-family: 'Nunito', system-ui, sans-serif; font-weight: 700; word-break: break-word;
+  font-family: 'Nunito', system-ui, sans-serif; font-weight: 700;
 }
+.text-interior { position: relative; overflow: hidden; max-height: calc(1.7em * 4); }
+.text.llarg { font-size: 1.65rem; }
+.paraula { display: inline-block; white-space: nowrap; }
 .c { display: inline-block; padding: 0 1px; border-radius: 6px; min-width: .3em; color: #b2aa9a; }
 .c.espai { color: #e2dccf; }
 .c.fet { color: var(--verd-fosc); }
