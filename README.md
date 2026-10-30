@@ -1,4 +1,4 @@
-# ⌨️ Teclat Màgic
+# 🪄 Dits Màgics
 
 Aplicació web per aprendre i practicar mecanografia en **català**, pensada per a nens i nenes.
 Tota la lògica funciona al navegador (HTML + CSS + JavaScript, sense servidor ni dependències).

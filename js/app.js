@@ -1,17 +1,18 @@
 // =====================================================================
-//  Teclat Màgic — lògica de l'aplicació (tot al navegador)
+//  Dits Màgics — lògica de l'aplicació (tot al navegador)
 // =====================================================================
 const $ = (id) => document.getElementById(id);
 
 // ---------------------------------------------------------------------
 //  Desament (localStorage, amb alternativa en memòria)
 // ---------------------------------------------------------------------
-const CLAU = 'teclat-magic.v1';
+const CLAU = 'dits-magics.v1';
+const CLAU_ANTIGA = 'teclat-magic.v1'; // nom anterior: es recupera el progrés si hi és
 let dades = { perfils: {}, actiu: null, opcions: { so: true, colors: true, desbloquejar: false } };
 
 function carrega() {
   try {
-    const d = JSON.parse(localStorage.getItem(CLAU));
+    const d = JSON.parse(localStorage.getItem(CLAU) || localStorage.getItem(CLAU_ANTIGA));
     if (d && d.perfils) dades = { ...dades, ...d, opcions: { ...dades.opcions, ...d.opcions } };
   } catch (e) { /* sense emmagatzematge: treballem en memòria */ }
 }
