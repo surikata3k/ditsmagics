@@ -14,10 +14,11 @@
 <body>
   <header class="barra">
     <div class="logo"><span class="logo-icona" aria-hidden="true">🪄</span> Dits Màgics</div>
-    <div class="perfil">
-      <label for="selPerfil">Qui practica?</label>
-      <select id="selPerfil"></select>
-      <button id="btnNouPerfil" class="btn btn-petit" type="button">+ Nou</button>
+    <div class="opcions">
+      <label><input type="checkbox" id="optSo"> 🔊 Sons</label>
+      <label><input type="checkbox" id="optColors"> 🎨 Colors del teclat</label>
+      <label><input type="checkbox" id="optDesbloquejar"> 🔓 Desbloquejar nivells</label>
+      <button id="btnReiniciar" class="btn-enllac" type="button">Reinicia el progrés</button>
     </div>
   </header>
 
@@ -25,16 +26,10 @@
     <!-- PANTALLA: NIVELLS -->
     <section id="pantallaNivells" class="pantalla">
       <div class="intro">
-        <h1>Hola, <span id="nomSalutacio">amic</span>! 👋</h1>
+        <h1>Hola! 👋</h1>
         <p>Tria un nivell. Cada nivell t'ensenya tecles noves. Quan aconsegueixis almenys una estrella ⭐ s'obrirà el següent.</p>
       </div>
       <div id="graellaNivells" class="graella"></div>
-      <div class="opcions">
-        <label><input type="checkbox" id="optSo"> Sons</label>
-        <label><input type="checkbox" id="optColors"> Colors dels dits al teclat</label>
-        <label><input type="checkbox" id="optDesbloquejar"> Desbloquejar tots els nivells</label>
-        <button id="btnEsborrarPerfil" class="btn-enllac" type="button">Esborrar aquest perfil</button>
-      </div>
     </section>
 
     <!-- PANTALLA: EXERCICI -->
@@ -58,6 +53,13 @@
     </section>
   </main>
 
+  <footer class="peu">
+    Creat per <a href="https://surikata3k.com" target="_blank" rel="noopener">surikata3k.com</a>
+    · Programari lliure amb llicència
+    <a href="https://github.com/surikata3k/ditsmagics/blob/main/LICENSE" target="_blank" rel="noopener">GNU AGPL v3.0</a>
+    · <a href="https://github.com/surikata3k/ditsmagics" target="_blank" rel="noopener">Codi font</a>
+  </footer>
+
   <!-- DIÀLEG: RESULTAT -->
   <dialog id="dlgResultat" class="dialeg">
     <div id="resEstrelles" class="res-estrelles"></div>
@@ -75,17 +77,6 @@
     </div>
   </dialog>
 
-  <!-- DIÀLEG: NOU PERFIL -->
-  <dialog id="dlgPerfil" class="dialeg">
-    <form id="formPerfil" method="dialog">
-      <h2>Com et dius?</h2>
-      <input id="inpNom" type="text" maxlength="20" autocomplete="off" placeholder="Escriu el teu nom" required>
-      <div class="res-botons">
-        <button class="btn" type="submit" value="ok">Comencem!</button>
-        <button id="btnCancelPerfil" class="btn btn-sec" type="button">Cancel·la</button>
-      </div>
-    </form>
-  </dialog>
 
   <script src="js/teclat.js"></script>
   <script src="js/nivells.js"></script>

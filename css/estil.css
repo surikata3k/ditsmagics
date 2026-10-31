@@ -38,10 +38,9 @@ button { font: inherit; cursor: pointer; }
 }
 .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: -.01em; }
 .logo-icona { margin-right: 4px; }
-.perfil { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-.perfil select {
-  font: inherit; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--linia); background: var(--fons);
-}
+.barra .opcions { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-weight: 600; color: var(--tinta-suau); }
+.barra .opcions label { display: flex; gap: 6px; align-items: center; cursor: pointer; }
+.barra .opcions input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
 
 /* ---------- Botons ---------- */
 .btn {
@@ -89,11 +88,6 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 .buides { color: #ddd6c6; }
 .nivell.tancat { opacity: .55; cursor: not-allowed; box-shadow: none; }
 .nivell.tancat .num { background: #ddd6c6; }
-.opcions {
-  display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 28px;
-  padding-top: 16px; border-top: 1px solid var(--linia); color: var(--tinta-suau);
-}
-.opcions label { display: flex; gap: 6px; align-items: center; }
 
 /* ---------- Pantalla d'exercici ---------- */
 .cap-exercici { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -222,3 +216,11 @@ kbd {
   .text { font-size: 1.5rem; padding: 16px; }
   .stats div { min-width: 70px; padding: 4px 8px; }
 }
+
+/* ---------- Peu de pàgina ---------- */
+.peu {
+  max-width: 1100px; margin: 8px auto 0; padding: 18px 24px 28px; text-align: center;
+  font-size: .9rem; color: var(--tinta-suau); border-top: 1px solid var(--linia);
+}
+.peu a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.peu a:hover { text-decoration: underline; }

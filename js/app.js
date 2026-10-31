@@ -49,51 +49,23 @@ function so(tipus) {
 }
 
 // ---------------------------------------------------------------------
-//  Perfils
+//  Progrés (un sol perfil, sense registre)
 // ---------------------------------------------------------------------
-function pintaPerfils() {
-  const sel = $('selPerfil');
-  sel.innerHTML = '';
-  Object.keys(dades.perfils).forEach((nom) => {
-    const o = document.createElement('option');
-    o.value = o.textContent = nom;
-    sel.appendChild(o);
-  });
-  sel.value = dades.actiu || '';
-  $('nomSalutacio').textContent = dades.actiu || 'amic';
+const PERFIL_PER_DEFECTE = 'jugador';
+function preparaPerfil() {
+  // Si hi havia perfils d'una versió anterior, es conserva el que estava actiu.
+  if (!dades.actiu || !dades.perfils[dades.actiu]) {
+    dades.actiu = Object.keys(dades.perfils)[0] || PERFIL_PER_DEFECTE;
+  }
+  if (!dades.perfils[dades.actiu]) dades.perfils[dades.actiu] = { estrelles: {}, millorPPM: {} };
 }
 
-function nouPerfil() {
-  $('inpNom').value = '';
-  $('dlgPerfil').showModal();
-}
-
-$('formPerfil').addEventListener('submit', () => {
-  const nom = $('inpNom').value.trim();
-  if (!nom) return;
-  if (!dades.perfils[nom]) dades.perfils[nom] = { estrelles: {}, millorPPM: {} };
-  dades.actiu = nom;
+$('btnReiniciar').addEventListener('click', (e) => {
+  e.currentTarget.blur();
+  if (!confirm('Segur que vols esborrar tot el progrés (estrelles i rècords)?')) return;
+  dades.perfils[dades.actiu] = { estrelles: {}, millorPPM: {} };
   desa();
-  pintaPerfils();
   pintaNivells();
-});
-$('btnCancelPerfil').addEventListener('click', () => $('dlgPerfil').close());
-$('btnNouPerfil').addEventListener('click', nouPerfil);
-$('selPerfil').addEventListener('change', (e) => {
-  dades.actiu = e.target.value;
-  desa();
-  pintaPerfils();
-  pintaNivells();
-});
-$('btnEsborrarPerfil').addEventListener('click', () => {
-  if (!dades.actiu) return;
-  if (!confirm(`Segur que vols esborrar el perfil de ${dades.actiu} i tot el seu progrés?`)) return;
-  delete dades.perfils[dades.actiu];
-  dades.actiu = Object.keys(dades.perfils)[0] || null;
-  desa();
-  pintaPerfils();
-  pintaNivells();
-  if (!dades.actiu) nouPerfil();
 });
 
 // ---------------------------------------------------------------------
@@ -104,6 +76,7 @@ $('btnEsborrarPerfil').addEventListener('click', () => {
   el.checked = !!dades.opcions[clau];
   el.addEventListener('change', () => {
     dades.opcions[clau] = el.checked;
+    el.blur(); // que l'espai de l'exercici no torni a canviar l'opció
     desa();
     aplicaOpcions();
     pintaNivells();
@@ -403,7 +376,7 @@ carrega();
 dibuixaTeclat($('teclat'));
 pintaLlegenda();
 [['optSo', 'so'], ['optColors', 'colors'], ['optDesbloquejar', 'desbloquejar']].forEach(([id, clau]) => ($(id).checked = !!dades.opcions[clau]));
+preparaPerfil();
+desa();
 aplicaOpcions();
-pintaPerfils();
 pintaNivells();
-if (!dades.actiu) nouPerfil();
