@@ -9,10 +9,10 @@ Tota la lògica funciona al navegador (HTML + CSS + JavaScript, sense servidor n
 
 - **Teclat en pantalla** (distribució espanyola/catalana): la tecla que toca prémer es marca en **verd** i, si t'equivoques, la tecla que has premut es marca en **vermell**.
 - **Pista del dit**: indica quina tecla i amb quin dit s'ha de prémer (també Majúscules i accents).
-- **43 nivells en tres seccions**:
+- **44 nivells en tres seccions**:
   - **Inicial (1-24)**: primer la fila base (F J, D K, S L, A Ñ, G H), després la fila superior, la inferior, paraules, majúscules, accents (à è ò / é í ó ú ï ü), apòstrof i ela geminada, números i frases.
-  - **Mitjà (25-34)**: textos curts temàtics (animals, escola, estacions...), preguntes i exclamacions, diàlegs amb cometes, números i dates, endevinalles.
-  - **Avançat (35-43)**: textos llargs de 400-450 caràcters (contes, natura, l'espai, tradicions, geografia, tecnologia, cartes, receptes) i un repte final de més de 800 caràcters.
+  - **Mitjà (25-35)**: textos curts temàtics (animals, escola, estacions...), preguntes i exclamacions, diàlegs amb cometes, números i dates, endevinalles, dites i refranys catalans.
+  - **Avançat (36-44)**: textos llargs de 400-450 caràcters (contes, natura, l'espai, tradicions, geografia, tecnologia, cartes, receptes) i un repte final de més de 800 caràcters.
 - **Estrelles** segons la precisió (≥85 % ⭐, ≥92 % ⭐⭐, ≥97 % ⭐⭐⭐). Amb una estrella s'obre el nivell següent.
 - **Sense registre**: només cal obrir la pàgina i començar. El progrés es desa al navegador amb `localStorage` i es pot reiniciar.
 - Estadístiques en directe: precisió, paraules per minut i errors.
@@ -49,7 +49,7 @@ Edita `NIVELLS` a `js/nivells.js`. Cada nivell té:
 
 Les paraules de pràctica són a `PARAULES` i les frases a `FRASES`.
 
-Els nivells mitjans i avançats són a `NIVELLS_MITJANS` i `NIVELLS_AVANCATS`. Cada un té una llista de `textos` i, en cada intent, se n'escull un a l'atzar (o se n'uneixen diversos amb `uneix: 2`). Per afegir un nivell nou, només cal afegir-hi un objecte amb `titol`, `desc` i `textos`.
+Els nivells mitjans i avançats són a `NIVELLS_MITJANS` i `NIVELLS_AVANCATS`. Cada un té una llista de `textos` i, en cada intent, se n'escull un a l'atzar (o se n'uneixen diversos amb `uneix: 2`). Per afegir un nivell nou, només cal afegir-hi un objecte amb `titol`, `desc` i `textos`. Si l'afegeixes al mig (no al final de tot), puja `VERSIO_NIVELLS` a `js/app.js` i afegeix-hi una migració perquè les estrelles desades no es desquadrin.
 
 ## Autoria i llicència
 

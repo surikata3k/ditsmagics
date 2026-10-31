@@ -52,6 +52,26 @@ function so(tipus) {
 //  Progrés (un sol perfil, sense registre)
 // ---------------------------------------------------------------------
 const PERFIL_PER_DEFECTE = 'jugador';
+// Versió de la llista de nivells. Quan s'afegeix un nivell al mig, cal moure
+// les estrelles desades dels nivells posteriors perquè no es desquadrin.
+const VERSIO_NIVELLS = 2;
+const MIGRACIONS = {
+  // v2: nou nivell «Dites i refranys» a la posició 35 (índex 34)
+  2: (p) => desplaca(p, 34),
+};
+function desplaca(p, desDe) {
+  ['estrelles', 'millorPPM'].forEach((camp) => {
+    const nou = {};
+    Object.entries(p[camp] || {}).forEach(([k, v]) => { const i = +k; nou[i >= desDe ? i + 1 : i] = v; });
+    p[camp] = nou;
+  });
+}
+function migraNivells() {
+  const v = dades.versioNivells || 1;
+  for (let n = v + 1; n <= VERSIO_NIVELLS; n++) Object.values(dades.perfils).forEach(MIGRACIONS[n]);
+  dades.versioNivells = VERSIO_NIVELLS;
+}
+
 function preparaPerfil() {
   // Si hi havia perfils d'una versió anterior, es conserva el que estava actiu.
   if (!dades.actiu || !dades.perfils[dades.actiu]) {
@@ -376,6 +396,7 @@ carrega();
 dibuixaTeclat($('teclat'));
 pintaLlegenda();
 [['optSo', 'so'], ['optColors', 'colors'], ['optDesbloquejar', 'desbloquejar']].forEach(([id, clau]) => ($(id).checked = !!dades.opcions[clau]));
+migraNivells();
 preparaPerfil();
 desa();
 aplicaOpcions();
