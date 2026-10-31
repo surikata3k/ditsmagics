@@ -34,6 +34,10 @@ js/nivells.js     Definició dels nivells, paraules i frases, generació de text
 js/app.js         Lògica: exercici, puntuació, opcions, desament
 ```
 
+## Publicar canvis
+
+El domini passa per Cloudflare, que guarda el CSS i el JavaScript a la memòria cau unes hores. Cada vegada que canviïs un fitxer de `css/` o `js/`, puja el número `?v=` dels enllaços d'`index.html` (per exemple de `?v=2` a `?v=3`) perquè tothom rebi la versió nova.
+
 ## Afegir o canviar nivells
 
 Edita `NIVELLS` a `js/nivells.js`. Cada nivell té:
