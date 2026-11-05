@@ -1,6 +1,6 @@
 # 🪄 Dits Màgics
 
-**▶ Juga-hi: https://surikata3k.github.io/ditsmagics/**
+**▶ Juga-hi: https://surikata3k.com/ditsmagics/**
 
 Aplicació web per aprendre i practicar mecanografia en **català**, pensada per a nens i nenes.
 Tota la lògica funciona al navegador (HTML + CSS + JavaScript, sense servidor ni dependències).
@@ -22,7 +22,7 @@ Tota la lògica funciona al navegador (HTML + CSS + JavaScript, sense servidor n
 
 Obre `index.html` amb el navegador (doble clic). No cal instal·lar res.
 
-La versió publicada és a **https://surikata3k.github.io/ditsmagics/** (GitHub Pages, branca `main`, carpeta arrel).
+La versió publicada és a **https://surikata3k.com/ditsmagics/** (GitHub Pages, branca `main`, carpeta arrel).
 
 ## Estructura
 

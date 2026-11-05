@@ -217,6 +217,13 @@ kbd {
   .stats div { min-width: 70px; padding: 4px 8px; }
 }
 
+/* ---------- Informació de l'app ---------- */
+.info-app {
+  max-width: 760px; margin: 24px auto 0; padding: 0 24px; color: var(--tinta-suau); line-height: 1.6;
+}
+.info-app h2 { font-size: 1.25rem; color: inherit; margin: 0 0 8px; }
+.info-app p { margin: 0 0 10px; }
+
 /* ---------- Peu de pàgina ---------- */
 .peu {
   max-width: 1100px; margin: 8px auto 0; padding: 18px 24px 28px; text-align: center;
