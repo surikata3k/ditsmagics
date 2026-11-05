@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dits Màgics — Touch typing for kids</title>
+  <meta name="description" content="Learn to touch type by playing: 44 levels with an on-screen keyboard, finger hints and stars to earn. Free, no sign-up, runs in your browser.">
+  <link rel="canonical" href="https://surikata3k.com/ditsmagics/en/">
+  <link rel="alternate" hreflang="ca" href="https://surikata3k.com/ditsmagics/">
+  <link rel="alternate" hreflang="es" href="https://surikata3k.com/ditsmagics/es/">
+  <link rel="alternate" hreflang="en" href="https://surikata3k.com/ditsmagics/en/">
+  <link rel="alternate" hreflang="x-default" href="https://surikata3k.com/ditsmagics/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Surikata3K">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="ca_ES">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:title" content="Dits Màgics — Touch typing for kids">
+  <meta property="og:description" content="Learn to touch type by playing: 44 levels with an on-screen keyboard, finger hints and stars to earn. Free, no sign-up, runs in your browser.">
+  <meta property="og:url" content="https://surikata3k.com/ditsmagics/en/">
+  <meta property="og:image" content="https://surikata3k.com/img/og/ditsmagics-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#ffffff">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Dits Màgics", "url": "https://surikata3k.com/ditsmagics/en/", "description": "Learn to touch type by playing: 44 levels with an on-screen keyboard, finger hints and stars to earn. Free, no sign-up, runs in your browser.", "image": "https://surikata3k.com/img/og/ditsmagics-en.png", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "audience": {"@type": "EducationalAudience", "educationalRole": "student"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://www.gnu.org/licenses/agpl-3.0.html", "availableLanguage": ["ca", "es", "en"]}</script>
+  <link rel="icon" href="/img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estil.css?v=5">
+</head>
+<body>
+  <header class="barra">
+    <div class="logo"><span class="logo-icona" aria-hidden="true">🪄</span> Dits Màgics</div>
+    <nav class="idiomes" aria-label="Language"><a href="/ditsmagics/" hreflang="ca" lang="ca" title="Català">CA</a><a href="/ditsmagics/es/" hreflang="es" lang="es" title="Castellano">ES</a><a href="/ditsmagics/en/" hreflang="en" lang="en" aria-current="page" title="English">EN</a></nav>
+    <div class="opcions">
+      <label><input type="checkbox" id="optSo"> 🔊 Sounds</label>
+      <label><input type="checkbox" id="optColors"> 🎨 Keyboard colours</label>
+      <label><input type="checkbox" id="optDesbloquejar"> 🔓 Unlock all levels</label>
+      <button id="btnReiniciar" class="btn-enllac" type="button">Reset progress</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- PANTALLA: NIVELLS -->
+    <section id="pantallaNivells" class="pantalla">
+      <div class="intro">
+        <h1>Hello! 👋</h1>
+        <p>Choose a level. Each level teaches you new keys. When you earn at least one star ⭐, the next level unlocks.</p>
+      </div>
+      <div id="graellaNivells" class="graella"></div>
+    </section>
+
+    <!-- PANTALLA: EXERCICI -->
+    <section id="pantallaExercici" class="pantalla" hidden>
+      <div class="cap-exercici">
+        <button id="btnTornar" class="btn btn-petit" type="button">← Levels</button>
+        <h2 id="titolNivell"></h2>
+        <div class="stats">
+          <div><b id="statPrecisio">100%</b><span>accuracy</span></div>
+          <div><b id="statPPM">0</b><span>words/min</span></div>
+          <div><b id="statErrors">0</b><span>mistakes</span></div>
+        </div>
+      </div>
+      <p id="descNivell" class="desc"></p>
+      <div class="progres"><div id="barraProgres"></div></div>
+      <div id="text" class="text" aria-live="polite"></div>
+      <p id="pista" class="pista"></p>
+      <div id="teclat" class="teclat"></div>
+      <div id="llegenda" class="llegenda"></div>
+      <p class="ajuda">Tip: look at the screen, not the keyboard! Your fingers always go back home: <b>A S D F</b> · <b>J K L Ñ</b></p>
+    </section>
+  </main>
+
+  <section class="info-app" aria-labelledby="infoTitol">
+    <h2 id="infoTitol">What is Dits Màgics?</h2>
+    <p>Dits Màgics (“magic fingers” in Catalan) is a free app that teaches children to <strong>touch type in English</strong>. Each level introduces new keys: first the home row, then the top and bottom rows, and step by step words, capital letters, apostrophes, punctuation, numbers and sentences. It is also available in Catalan and Spanish.</p>
+    <p>The on-screen keyboard highlights the next key in green and shows which finger to use. Depending on your accuracy you earn up to three stars, and one star unlocks the next level. The keyboard shown is the Spanish layout. No sign-up needed: your progress is saved in your browser.</p>
+  </section>
+
+  <footer class="peu">
+    Made by <a href="https://surikata3k.com/">surikata3k.com</a> · <a href="https://surikata3k.com/#apps">More apps</a>
+    · Free software under the
+    <a href="https://github.com/surikata3k/ditsmagics/blob/main/LICENSE" target="_blank" rel="noopener">GNU AGPL v3.0</a>
+    · <a href="https://github.com/surikata3k/ditsmagics" target="_blank" rel="noopener">Source code</a>
+  </footer>
+
+  <!-- DIÀLEG: RESULTAT -->
+  <dialog id="dlgResultat" class="dialeg">
+    <div id="resEstrelles" class="res-estrelles"></div>
+    <h2 id="resTitol"></h2>
+    <p id="resMissatge"></p>
+    <div class="res-stats">
+      <div><b id="resPrecisio"></b><span>accuracy</span></div>
+      <div><b id="resPPM"></b><span>words/min</span></div>
+      <div><b id="resTemps"></b><span>time</span></div>
+    </div>
+    <div class="res-botons">
+      <button id="btnSeguent" class="btn" type="button">Next level →</button>
+      <button id="btnRepetir" class="btn btn-sec" type="button">Try again</button>
+      <button id="btnResNivells" class="btn btn-sec" type="button">Levels</button>
+    </div>
+  </dialog>
+
+  <script src="../js/i18n.js?v=5"></script>
+  <script src="../js/teclat.js?v=5"></script>
+  <script src="../js/nivells-en.js?v=5"></script>
+  <script src="../js/nivells.js?v=5"></script>
+  <script src="../js/app.js?v=5"></script>
+</body>
+</html>

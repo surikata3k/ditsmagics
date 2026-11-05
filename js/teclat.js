@@ -33,15 +33,15 @@ const FILES_TECLAT = [
 
 // Dit que prem cada tecla
 const DITS = {
-  lp: { nom: 'dit petit esquerre', ma: 'E' },
-  la: { nom: 'dit anular esquerre', ma: 'E' },
-  lm: { nom: 'dit del mig esquerre', ma: 'E' },
-  li: { nom: 'dit índex esquerre', ma: 'E' },
-  ri: { nom: 'dit índex dret', ma: 'D' },
-  rm: { nom: 'dit del mig dret', ma: 'D' },
-  ra: { nom: 'dit anular dret', ma: 'D' },
-  rp: { nom: 'dit petit dret', ma: 'D' },
-  th: { nom: 'polze', ma: '' },
+  lp: { nom: T.dits.lp, ma: 'E' },
+  la: { nom: T.dits.la, ma: 'E' },
+  lm: { nom: T.dits.lm, ma: 'E' },
+  li: { nom: T.dits.li, ma: 'E' },
+  ri: { nom: T.dits.ri, ma: 'D' },
+  rm: { nom: T.dits.rm, ma: 'D' },
+  ra: { nom: T.dits.ra, ma: 'D' },
+  rp: { nom: T.dits.rp, ma: 'D' },
+  th: { nom: T.dits.th, ma: '' },
 };
 
 const DIT_PER_TECLA = {};
@@ -57,11 +57,7 @@ assigna('rp', 'Digit0 Minus Equal Backspace KeyP BracketLeft BracketRight Enter 
 assigna('th', 'Space AltLeft');
 
 // Nom amigable de cada tecla per a les pistes
-const NOM_TECLA = {
-  Space: 'l\'espai', Minus: "l'apòstrof (')", Comma: 'la coma (,)', Period: 'el punt (.)', Slash: 'el guionet (-)',
-  BracketLeft: "l'accent obert (`)", Quote: "l'accent tancat (´)", Semicolon: 'la Ñ', Backslash: 'la Ç',
-  ShiftLeft: 'Majúscules (esquerra)', ShiftRight: 'Majúscules (dreta)', Digit3: 'el 3',
-};
+const NOM_TECLA = T.tecles;
 
 // ---- Mapa caràcter → com s'escriu --------------------------------------
 const MAPA_CARACTERS = {};
@@ -113,7 +109,7 @@ function dibuixaTeclat(contenidor) {
       const cap = document.createElement('div');
       cap.className = 'cap';
       if (tipus === 'fn') {
-        cap.innerHTML = `<span class="etiqueta-fn">${base}</span>`;
+        cap.innerHTML = `<span class="etiqueta-fn">${T.fn[codi] || base}</span>`;
       } else if (/^Key/.test(codi) || codi === 'Semicolon' || codi === 'Backslash') {
         cap.innerHTML = `<span class="principal">${maj}</span>`;
       } else {

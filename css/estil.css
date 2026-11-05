@@ -231,3 +231,9 @@ kbd {
 }
 .peu a { color: var(--accent); font-weight: 700; text-decoration: none; }
 .peu a:hover { text-decoration: underline; }
+
+/* ---------- Selector d'idioma ---------- */
+.idiomes { display: flex; gap: 4px; margin-left: 12px; margin-right: auto; font-weight: 800; font-size: .85rem; }
+.idiomes a { padding: 4px 8px; border-radius: 8px; color: var(--tinta-suau); text-decoration: none; border: 1px solid transparent; }
+.idiomes a:hover { color: var(--accent); }
+.idiomes a[aria-current="page"] { color: var(--accent); border-color: var(--linia); background: #fff; }

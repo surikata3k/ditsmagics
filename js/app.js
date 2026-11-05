@@ -6,13 +6,14 @@ const $ = (id) => document.getElementById(id);
 // ---------------------------------------------------------------------
 //  Desament (localStorage, amb alternativa en memòria)
 // ---------------------------------------------------------------------
-const CLAU = 'dits-magics.v1';
+// El català conserva la clau original; els altres idiomes tenen el seu propi progrés.
+const CLAU = IDIOMA === 'ca' ? 'dits-magics.v1' : `dits-magics.${IDIOMA}.v1`;
 const CLAU_ANTIGA = 'teclat-magic.v1'; // nom anterior: es recupera el progrés si hi és
 let dades = { perfils: {}, actiu: null, opcions: { so: true, colors: true, desbloquejar: false } };
 
 function carrega() {
   try {
-    const d = JSON.parse(localStorage.getItem(CLAU) || localStorage.getItem(CLAU_ANTIGA));
+    const d = JSON.parse(localStorage.getItem(CLAU) || (IDIOMA === 'ca' ? localStorage.getItem(CLAU_ANTIGA) : null));
     if (d && d.perfils) dades = { ...dades, ...d, opcions: { ...dades.opcions, ...d.opcions } };
   } catch (e) { /* sense emmagatzematge: treballem en memòria */ }
 }
@@ -82,7 +83,7 @@ function preparaPerfil() {
 
 $('btnReiniciar').addEventListener('click', (e) => {
   e.currentTarget.blur();
-  if (!confirm('Segur que vols esborrar tot el progrés (estrelles i rècords)?')) return;
+  if (!confirm(T.confirmaReinici)) return;
   dades.perfils[dades.actiu] = { estrelles: {}, millorPPM: {} };
   desa();
   pintaNivells();
@@ -139,7 +140,7 @@ function pintaNivells() {
       <span class="nom">${n.titol}</span>
       <span class="peu-nivell">
         <span class="estrelles">${'★'.repeat(est)}<span class="buides">${'★'.repeat(3 - est)}</span></span>
-        ${est && ppm ? `<span class="record" title="Millor velocitat">${ppm} ppm</span>` : ''}
+        ${est && ppm ? `<span class="record" title="${T.millorVelocitat}">${ppm} ${T.ppm}</span>` : ''}
       </span>`;
     b.addEventListener('click', () => comencaNivell(i));
     g.appendChild(b);
@@ -172,7 +173,7 @@ function comencaNivell(i) {
   Object.assign(estat, {
     nivell: i, text: generaText(i), spans: [], pos: 0, fase: 0, correctes: 0, errors: 0, inici: null, errorsPos: new Set(),
   });
-  $('titolNivell').textContent = `Nivell ${i + 1}: ${n.titol}`;
+  $('titolNivell').textContent = T.nivell(i + 1, n.titol);
   $('descNivell').textContent = n.desc;
   pintaText();
   actualitzaStats();
@@ -233,8 +234,8 @@ function marcaObjectiu() {
 
 function nomTecla(codi) {
   if (NOM_TECLA[codi]) return NOM_TECLA[codi];
-  if (/^Key/.test(codi)) return 'la ' + codi.slice(3);
-  if (/^Digit/.test(codi)) return 'el ' + codi.slice(5);
+  if (/^Key/.test(codi)) return T.lletra(codi.slice(3));
+  if (/^Digit/.test(codi)) return T.digit(codi.slice(5));
   return codi;
 }
 
@@ -244,10 +245,10 @@ function textPista(c, tecles) {
   const dit = (codi) => `<span class="punt dit-${DIT_PER_TECLA[codi]}"></span>${DITS[DIT_PER_TECLA[codi]].nom}`;
   const [principal, shift] = tecles;
   let html = '';
-  if (shift) html += `Mantén <kbd>Majúscules</kbd> amb el ${dit(shift)} i prem `;
-  else html += 'Prem ';
-  html += `<kbd>${nomTecla(principal)}</kbd> amb el ${dit(principal)}`;
-  if (info.morta) html += estat.fase === 0 ? ' <em>(després, la vocal)</em>' : ' <em>(ara la vocal)</em>';
+  if (shift) html += T.mantenMaj(dit(shift));
+  else html += T.prem;
+  html += T.ambEl(nomTecla(principal), dit(principal));
+  if (info.morta) html += estat.fase === 0 ? T.despresVocal : T.araVocal;
   return html;
 }
 
@@ -354,12 +355,7 @@ function acaba() {
   document.querySelectorAll('.tecla.objectiu').forEach((t) => t.classList.remove('objectiu'));
   so('fi');
 
-  const missatges = [
-    ['Gairebé!', 'Necessites com a mínim un 85% de precisió per passar de nivell. Ves amb calma: és millor anar a poc a poc i no equivocar-se.'],
-    ['Nivell superat!', 'Molt bé! Pots passar al següent nivell o repetir-lo per aconseguir més estrelles.'],
-    ['Molt bé!', 'Gairebé perfecte! Continua així.'],
-    ['Fantàstic!', 'Excel·lent! Ets un crac del teclat! 🎉'],
-  ];
+  const missatges = T.missatges;
   $('resEstrelles').innerHTML = '★'.repeat(est) + `<span class="buides">${'★'.repeat(3 - est)}</span>`;
   $('resTitol').textContent = missatges[est][0];
   $('resMissatge').textContent = missatges[est][1];

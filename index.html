@@ -6,9 +6,15 @@
   <title>Dits Màgics — Mecanografia en català per a nens i nenes</title>
   <meta name="description" content="Aprèn mecanografia en català jugant: 44 nivells amb teclat en pantalla, pistes de quin dit fer servir i estrelles. Gratuït, sense registre i al navegador.">
   <link rel="canonical" href="https://surikata3k.com/ditsmagics/">
+  <link rel="alternate" hreflang="ca" href="https://surikata3k.com/ditsmagics/">
+  <link rel="alternate" hreflang="es" href="https://surikata3k.com/ditsmagics/es/">
+  <link rel="alternate" hreflang="en" href="https://surikata3k.com/ditsmagics/en/">
+  <link rel="alternate" hreflang="x-default" href="https://surikata3k.com/ditsmagics/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Surikata3K">
   <meta property="og:locale" content="ca_ES">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:title" content="Dits Màgics — Mecanografia en català per a nens i nenes">
   <meta property="og:description" content="Aprèn mecanografia en català jugant: 44 nivells amb teclat en pantalla, pistes de quin dit fer servir i estrelles. Gratuït, sense registre i al navegador.">
   <meta property="og:url" content="https://surikata3k.com/ditsmagics/">
@@ -17,18 +23,19 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#ffffff">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Dits Màgics", "url": "https://surikata3k.com/ditsmagics/", "description": "Aprèn mecanografia en català jugant: 44 nivells amb teclat en pantalla, pistes de quin dit fer servir i estrelles. Gratuït, sense registre i al navegador.", "image": "https://surikata3k.com/img/og/ditsmagics.png", "applicationCategory": "EducationalApplication", "operatingSystem": "Qualsevol (navegador web)", "inLanguage": "ca", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "audience": {"@type": "EducationalAudience", "educationalRole": "student"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://www.gnu.org/licenses/agpl-3.0.html"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Dits Màgics", "url": "https://surikata3k.com/ditsmagics/", "description": "Aprèn mecanografia en català jugant: 44 nivells amb teclat en pantalla, pistes de quin dit fer servir i estrelles. Gratuït, sense registre i al navegador.", "image": "https://surikata3k.com/img/og/ditsmagics.png", "applicationCategory": "EducationalApplication", "operatingSystem": "Qualsevol (navegador web)", "inLanguage": "ca", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "audience": {"@type": "EducationalAudience", "educationalRole": "student"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://www.gnu.org/licenses/agpl-3.0.html", "availableLanguage": ["ca", "es", "en"]}</script>
   <link rel="icon" href="/img/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estil.css?v=4">
+  <link rel="stylesheet" href="css/estil.css?v=5">
 </head>
 <body>
   <header class="barra">
     <div class="logo"><span class="logo-icona" aria-hidden="true">🪄</span> Dits Màgics</div>
+    <nav class="idiomes" aria-label="Idioma"><a href="/ditsmagics/" hreflang="ca" lang="ca" aria-current="page" title="Català">CA</a><a href="/ditsmagics/es/" hreflang="es" lang="es" title="Castellano">ES</a><a href="/ditsmagics/en/" hreflang="en" lang="en" title="English">EN</a></nav>
     <div class="opcions">
       <label><input type="checkbox" id="optSo"> 🔊 Sons</label>
       <label><input type="checkbox" id="optColors"> 🎨 Colors del teclat</label>
@@ -98,9 +105,10 @@
     </div>
   </dialog>
 
-
-  <script src="js/teclat.js?v=3"></script>
-  <script src="js/nivells.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/i18n.js?v=5"></script>
+  <script src="js/teclat.js?v=5"></script>
+  <script src="js/nivells-ca.js?v=5"></script>
+  <script src="js/nivells.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
 </body>
 </html>
